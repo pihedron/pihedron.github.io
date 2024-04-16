@@ -1,0 +1,56 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  color: white;
+  font-family: 'Google Sans';
+}
+
+#app {
+  width: 100%;
+  height: 100vh;
+}
+
+.big {
+  font-size: 96px;
+}
+
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.cascade {
+  display: block;
+  overflow: hidden;
+}
+
+.cascade span {
+  transition-property: font-size;
+  transition-duration: 500ms;
+  transition-timing-function: ease-out;
+}
+
+.cascade .float {
+  display: inline-block;
+  transform: translateY(100%);
+  animation-name: float;
+  animation-duration: 500ms;
+  animation-timing-function: ease-out;
+}
+
+.cascade .shrink {
+  font-size: 48px;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(200%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
