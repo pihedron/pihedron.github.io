@@ -3,8 +3,19 @@ body {
   padding: 0;
   background-color: black;
   color: white;
-  font-family: 'Google Sans';
+  font-family: 'JetBrains Mono';
   overflow: hidden;
+}
+
+a {
+  color: grey;
+  text-decoration: none;
+  transition-property: font-weight;
+  transition-duration: 0.2s;
+}
+
+a:hover {
+  font-weight: bold;
 }
 
 #app {
@@ -113,11 +124,29 @@ body {
 }
 
 .icon-path {
-  stroke: #fff;
-  fill: #fff;
+  stroke: white;
+  fill: white;
   fill-opacity: 0;
   transition-property: fill-opacity;
   transition-duration: 250ms;
+}
+
+.image {
+  display: block;
+  width: fit-content;
+  height: fit-content;
+  font-size: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.image img {
+  transition-property: filter;
+  transition-duration: 0.2s;
+}
+
+.image:hover img {
+  filter: brightness(0.5);
 }
 
 @keyframes float {
