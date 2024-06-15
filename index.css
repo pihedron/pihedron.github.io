@@ -133,14 +133,15 @@ a:hover {
 
 .image {
   display: block;
-  width: fit-content;
-  height: fit-content;
+  max-width: 640px;
+  max-height: 360px;
   font-size: 0;
   border-radius: 8px;
   overflow: hidden;
 }
 
 .image img {
+  width: 100%;
   transition-property: filter;
   transition-duration: 0.2s;
 }
