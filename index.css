@@ -138,16 +138,16 @@ a:hover {
   font-size: 0;
   border-radius: 8px;
   overflow: hidden;
+  transition-property: opacity;
+  transition-duration: 250ms;
+}
+
+.image:hover {
+  opacity: 0.5;
 }
 
 .image img {
   width: 100%;
-  transition-property: filter;
-  transition-duration: 0.2s;
-}
-
-.image:hover img {
-  filter: brightness(0.5);
 }
 
 @keyframes float {
