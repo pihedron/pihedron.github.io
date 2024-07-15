@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import { codeToHtml } from 'https://esm.sh/shiki@1.0.0'
 
 /**
  * performs `document.querySelector`
@@ -104,11 +105,37 @@ function render3D() {
   animate()
 }
 
-const app = $('#app')
-app.addEventListener('mousemove', e => {
-  app.style.setProperty('--mouse-x', e.x + 'px')
-  app.style.setProperty('--mouse-y', e.y + 'px')
-})
+function loadCode() {
+  const theme = 'one-dark-pro'
+  let codes = {}
+  const cards = $$('.card')
+  let hovered = false
+  cards.forEach(async card => {
+    const lang = card.getAttribute('aria-label')
+    codes[lang] = await codeToHtml(await (await fetch(`/sample/main.${lang}`)).text(), { lang, theme })
+    card.addEventListener('click', e => {
+      card.classList.add('press')
+      setTimeout(() => {
+        card.classList.remove('press')
+      }, 500)
+    })
+    card.addEventListener('mouseover', e => {
+      $('#code').innerHTML = codes[lang]
+      $('aside').classList.remove('fade')
+      hovered = true
+    })
+    card.addEventListener('mouseleave', e => {
+      hovered = false
+      setTimeout(() => {
+        if (!hovered) {
+          $('#code').innerHTML = ''
+          $('aside').classList.add('fade')
+        }
+      }, 1000);
+    })
+  })
+}
 
 animateText()
 render3D()
+loadCode()

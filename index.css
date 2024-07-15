@@ -1,3 +1,8 @@
+:root {
+  --radius: 8px;
+  --highlight: #ffffff10;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -104,13 +109,13 @@ a:hover {
   align-items: center;
   width: 100%;
   height: 100%;
-  border-radius: 8px;
+  border-radius: var(--radius);
   transition-property: background-color;
   transition-duration: 250ms;
 }
 
 .card:hover {
-  background-color: #ffffff10;
+  background-color: var(--highlight);
 }
 
 .card:hover .icon-path {
@@ -136,7 +141,7 @@ a:hover {
   max-width: 640px;
   max-height: 360px;
   font-size: 0;
-  border-radius: 8px;
+  border-radius: var(--radius);
   overflow: hidden;
   transition-property: opacity;
   transition-duration: 250ms;
@@ -148,6 +153,35 @@ a:hover {
 
 .image img {
   width: 100%;
+}
+
+.press {
+  animation-name: press;
+  animation-duration: 250ms;
+}
+
+aside {
+  position: absolute;
+  right: 64px;
+  top: 64px;
+  bottom: 64px;
+  padding: 32px;
+  width: 512px;
+  height: auto;
+  box-sizing: border-box;
+  background-color: var(--highlight);
+  border-radius: var(--radius);
+  transition-property: opacity;
+  transition-duration: 250ms;
+}
+
+pre {
+  background-color: transparent !important;
+  font-family: 'JetBrains Mono';
+}
+
+.fade {
+  opacity: 0;
 }
 
 @keyframes float {
@@ -168,5 +202,17 @@ a:hover {
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes press {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.75);
+  }
+  0% {
+    transform: scale(1);
   }
 }
