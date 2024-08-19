@@ -27,9 +27,9 @@ a:hover {
   width: 100%;
   height: 100vh;
   overflow-y: scroll;
-  background-image: radial-gradient(circle at 4px 4px, #ffffff08 4px, transparent 0);
+  background-image: radial-gradient(circle at 18px 18px, #ffffff08 4px, transparent 0);
   background-size: 40px 40px;
-  background-position: var(--mouse-x) var(--mouse-y);
+  background-position: 50% 50%;
 }
 
 #canvas {
@@ -110,7 +110,7 @@ a:hover {
   width: 100%;
   height: 100%;
   border-radius: var(--radius);
-  transition-property: background-color;
+  transition-property: background-color, transform;
   transition-duration: 250ms;
 }
 
@@ -156,8 +156,7 @@ a:hover {
 }
 
 .press {
-  animation-name: press;
-  animation-duration: 250ms;
+  transform: scale(0.75);
 }
 
 aside {
@@ -202,17 +201,5 @@ pre {
   }
   100% {
     opacity: 1;
-  }
-}
-
-@keyframes press {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(0.75);
-  }
-  0% {
-    transform: scale(1);
   }
 }

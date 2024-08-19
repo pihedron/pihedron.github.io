@@ -105,35 +105,42 @@ function render3D() {
   animate()
 }
 
-function loadCode() {
+async function registerCardEvents(card, codes, theme, hovered) {
+  const lang = card.getAttribute('aria-label')
+  codes[lang] = await codeToHtml(await (await fetch(`/sample/main.${lang}`)).text(), { lang, theme })
+  card.addEventListener('mousedown', e => {
+    card.classList.add('press')
+  })
+  card.addEventListener('mouseover', e => {
+    $('#code').innerHTML = codes[lang]
+    $('aside').classList.remove('fade')
+    hovered = true
+  })
+  card.addEventListener('mouseleave', e => {
+    hovered = false
+    setTimeout(() => {
+      if (!hovered) {
+        $('#code').innerHTML = ''
+        $('aside').classList.add('fade')
+      }
+    }, 1000)
+  })
+  return hovered
+}
+
+async function loadCode() {
   const theme = 'one-dark-pro'
   let codes = {}
   const cards = $$('.card')
   let hovered = false
-  cards.forEach(async card => {
-    const lang = card.getAttribute('aria-label')
-    codes[lang] = await codeToHtml(await (await fetch(`/sample/main.${lang}`)).text(), { lang, theme })
-    card.addEventListener('click', e => {
-      card.classList.add('press')
-      setTimeout(() => {
-        card.classList.remove('press')
-      }, 500)
-    })
-    card.addEventListener('mouseover', e => {
-      $('#code').innerHTML = codes[lang]
-      $('aside').classList.remove('fade')
-      hovered = true
-    })
-    card.addEventListener('mouseleave', e => {
-      hovered = false
-      setTimeout(() => {
-        if (!hovered) {
-          $('#code').innerHTML = ''
-          $('aside').classList.add('fade')
-        }
-      }, 1000);
-    })
+  window.addEventListener('mouseup', e => {
+    for (const card of cards) {
+      card.classList.remove('press')
+    }
   })
+  for (const card of cards) {
+    hovered = await registerCardEvents(card, codes, theme, hovered)
+  }
 }
 
 animateText()
