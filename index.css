@@ -1,26 +1,108 @@
 :root {
-  --radius: 8px;
-  --highlight: #ffffff10;
+  color-scheme: light dark;
+  --light: white;
+  --dark: #171923;
+  --color: light-dark(var(--dark), var(--light));
+  --bg: light-dark(var(--light), var(--dark));
+  --accent: light-dark(#1a5fff, #4b83ff);
+  --normal: 16px;
+  --title: 64px;
+  --heading: 48px;
+  --subheading: 32px;
+  --nav: 64px;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: black;
-  color: white;
+  background-color: var(--bg);
+  color: var(--color);
   font-family: 'JetBrains Mono';
   overflow: hidden;
 }
 
+a,
+button,
+input {
+  font-family: inherit;
+  color: inherit;
+  background-color: inherit;
+  outline: none;
+}
+
 a {
-  color: grey;
+  color: var(--accent);
   text-decoration: none;
-  transition-property: font-weight;
-  transition-duration: 0.2s;
+  transition: font-weight 200ms;
 }
 
 a:hover {
   font-weight: bold;
+}
+
+h1,
+h2,
+h3 {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: inherit;
+  font-weight: 600;
+  margin-block-end: 0.25em;
+}
+
+h1 {
+  font-size: var(--title);
+}
+
+h2 {
+  font-size: var(--heading);
+}
+
+h3 {
+  font-size: var(--subheading);
+}
+
+p a {
+  position: relative;
+  color: transparent;
+  font-weight: bold;
+  background-color: var(--accent);
+  background-image: linear-gradient(to right, var(--color), var(--color));
+  background-position: 100%;
+  background-size: 0%;
+  background-repeat: no-repeat;
+  background-clip: text;
+  -webkit-background-clip: text;
+  transition: background-size 250ms ease-out;
+}
+
+p a:hover {
+  background-position: 0;
+  background-size: 100%;
+}
+
+p a:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  width: 0;
+  bottom: 0;
+  background: var(--accent);
+  height: 2px;
+  border-radius: 1px;
+  transition: width 250ms ease-out;
+}
+
+p a:hover:after {
+  left: 0;
+  right: auto;
+  width: 100%;
 }
 
 #app {
@@ -36,28 +118,10 @@ a:hover {
   position: absolute;
   height: 100%;
   z-index: -1;
-  animation-name: fade;
-  animation-duration: 4000ms;
-  animation-timing-function: ease-out;
+  animation: fade 2000ms ease-out;
 }
 
-#pihedron {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-#about {
-  width: 100%;
-  height: 100vh;
-}
-
-.big {
-  font-size: 96px;
-}
-
-.hero {
+#hero {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,25 +129,32 @@ a:hover {
   height: 100vh;
 }
 
-.cascade {
-  display: block;
-  overflow: hidden;
-  transition-property: transform;
-  transition-duration: 250ms;
+#hero h1 {
+  margin: 0;
+  color: transparent;
+  background: linear-gradient(to right, var(--color), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
-.cascade span {
-  transition-property: font-size;
-  transition-duration: 250ms;
-  transition-timing-function: ease-out;
+section {
+  margin: auto;
+  width: 1024px;
+  overflow: auto;
 }
 
-.cascade .float {
-  display: inline-block;
-  transform: translateY(100%);
-  animation-name: float;
-  animation-duration: 1000ms;
-  animation-timing-function: ease-out;
+hr {
+  border: var(--color) solid 1px;
+  border-radius: 1px;
+}
+
+.split {
+  display: flex;
+  gap: 16px;
+}
+
+.split > * {
+  flex: 1;
 }
 
 .shrink {
@@ -93,33 +164,6 @@ a:hover {
 .panel {
   box-sizing: border-box;
   padding: 64px;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(2, 128px);
-  grid-template-rows: repeat(4, 128px);
-  gap: 16px;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  border-radius: var(--radius);
-  transition-property: background-color, transform;
-  transition-duration: 250ms;
-}
-
-.card:hover {
-  background-color: var(--highlight);
-}
-
-.card:hover .icon-path {
-  fill-opacity: 1;
 }
 
 .icon {
@@ -183,10 +227,18 @@ pre {
   opacity: 0;
 }
 
+@media screen and (max-width: 1024px) {
+  section {
+    width: 100%;
+    padding: 32px;
+  }
+}
+
 @keyframes float {
   0% {
     transform: translateY(200%);
   }
+
   100% {
     transform: translateY(0%);
   }
@@ -196,9 +248,7 @@ pre {
   0% {
     opacity: 0;
   }
-  50% {
-    opacity: 0;
-  }
+
   100% {
     opacity: 1;
   }

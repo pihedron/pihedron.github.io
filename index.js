@@ -19,27 +19,6 @@ export function $$(query) {
   return document.querySelectorAll(query)
 }
 
-function animateText() {
-  $$('.cascade').forEach(element => {
-    const chars = element.innerText.split('')
-    element.innerHTML = ''
-    chars.forEach((char, i) => {
-      const span = document.createElement('span')
-      span.classList.add('float')
-      span.innerHTML = char
-      span.style.animationDelay = i * 100 + 'ms'
-      setTimeout(() => {
-        span.classList.remove('float')
-      }, 1000 + i * 100)
-      element.appendChild(span)
-    })
-    setTimeout(() => {
-      element.classList.remove('big')
-      element.classList.add('shrink')
-    }, 1000 + chars.length * 100)
-  })
-}
-
 function render3D() {
   let tick = 0
   let width = window.innerWidth
@@ -143,6 +122,5 @@ async function loadCode() {
   }
 }
 
-animateText()
 render3D()
 loadCode()
