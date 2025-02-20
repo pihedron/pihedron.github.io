@@ -68,7 +68,7 @@ h3 {
   font-size: var(--subheading);
 }
 
-p a {
+p a, li a {
   position: relative;
   color: transparent;
   font-weight: bold;
@@ -82,12 +82,12 @@ p a {
   transition: background-size 250ms ease-out;
 }
 
-p a:hover {
+p a:hover, li a:hover {
   background-position: 0;
   background-size: 100%;
 }
 
-p a:after {
+p a::after, li a::after {
   content: "";
   position: absolute;
   z-index: -1;
@@ -100,7 +100,7 @@ p a:after {
   transition: width 250ms ease-out;
 }
 
-p a:hover:after {
+p a:hover::after, li a:hover::after {
   left: 0;
   right: auto;
   width: 100%;
@@ -136,6 +136,7 @@ p a:hover:after {
   background: linear-gradient(to right, var(--color), var(--accent));
   -webkit-background-clip: text;
   background-clip: text;
+  animation: grow 2000ms ease-out;
 }
 
 section {
@@ -148,6 +149,11 @@ section {
 hr {
   border: var(--color) solid 1px;
   border-radius: 1px;
+}
+
+em {
+  margin: 0;
+  color: var(--accent);
 }
 
 .split {
@@ -200,32 +206,17 @@ hr {
 
 .embed {
   font-size: 0;
+  overflow: hidden;
+  border-radius: 8px;
 }
 
 .embed iframe {
   width: 100%;
   aspect-ratio: 16 / 9;
-  overflow: hidden;
-  border-radius: var(--radius);
 }
 
 .press {
   transform: scale(0.75);
-}
-
-aside {
-  position: absolute;
-  right: 64px;
-  top: 64px;
-  bottom: 64px;
-  padding: 32px;
-  width: 512px;
-  height: auto;
-  box-sizing: border-box;
-  background-color: var(--highlight);
-  border-radius: var(--radius);
-  transition-property: opacity;
-  transition-duration: 250ms;
 }
 
 pre {
@@ -260,5 +251,19 @@ pre {
 
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
   }
 }
