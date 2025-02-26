@@ -1,5 +1,6 @@
 import * as THREE from 'three'
-import { codeToHtml } from 'https://esm.sh/shiki@1.0.0'
+import { codeToHtml } from 'shiki'
+import { gsap } from 'gsap'
 
 /**
  * performs `document.querySelector`
@@ -17,6 +18,10 @@ export function $(query) {
  */
 export function $$(query) {
   return document.querySelectorAll(query)
+}
+
+export function clamp(min, num, max) {
+  return Math.min(Math.max(num, min), max)
 }
 
 function render3D() {
@@ -76,12 +81,29 @@ function render3D() {
     const max = height
     const fraction = Math.min(1, app.scrollTop / max)
     skeleton.position.z = fraction * -8
-    const pihedron = $('#pihedron')
-    pihedron.style.opacity = 1 - fraction
-    pihedron.style.top = `${height / 2 - fraction * height / 2}px`
   })
 
   animate()
 }
 
+function init() {
+  /** @type {HTMLHeadingElement[]} */
+  const headings = $$('h2')
+
+  function watch() {
+    requestAnimationFrame(watch)
+    for (const h2 of headings) {
+      /** @type {HTMLSpanElement} */
+      const span = h2.firstElementChild
+      const scr = $('#app').scrollTop + window.innerHeight / 2
+      const y = h2.offsetTop + h2.offsetHeight / 2
+      const percent = clamp(0, (Math.abs(scr - y) - (window.innerHeight / 2 - 256)) / 2, 100)
+      span.style.transform = `translateY(${percent}%)`
+    }
+  }
+
+  // watch()
+}
+
 render3D()
+init()

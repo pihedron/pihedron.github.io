@@ -54,6 +54,7 @@ h3 {
   color: inherit;
   font-weight: 600;
   margin-block-end: 0.25em;
+  overflow: hidden;
 }
 
 h1 {
