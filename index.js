@@ -1,6 +1,11 @@
 import * as THREE from 'three'
 import { codeToHtml } from 'shiki'
-import { gsap } from 'gsap'
+import LocomotiveScroll from 'locomotive-scroll';
+
+const scroll = new LocomotiveScroll({
+  el: document.querySelector('[data-scroll-container]'),
+  smooth: true
+})
 
 /**
  * performs `document.querySelector`
@@ -87,22 +92,7 @@ function render3D() {
 }
 
 function init() {
-  /** @type {HTMLHeadingElement[]} */
-  const headings = $$('h2')
-
-  function watch() {
-    requestAnimationFrame(watch)
-    for (const h2 of headings) {
-      /** @type {HTMLSpanElement} */
-      const span = h2.firstElementChild
-      const scr = $('#app').scrollTop + window.innerHeight / 2
-      const y = h2.offsetTop + h2.offsetHeight / 2
-      const percent = clamp(0, (Math.abs(scr - y) - (window.innerHeight / 2 - 256)) / 2, 100)
-      span.style.transform = `translateY(${percent}%)`
-    }
-  }
-
-  // watch()
+  //
 }
 
 render3D()

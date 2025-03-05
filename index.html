@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="locomotive-scroll.css">
     <link rel="stylesheet" href="index.css">
     <style>
       html {
@@ -22,18 +23,18 @@
     </style>
   </head>
   <body>
-    <div id="app">
+    <div id="canvas"></div>
+    <div id="app" data-scroll-container>
       <div id="hero">
-        <div id="canvas"></div>
-        <h1>Pihedron</h1>
+        <h1 data-scroll data-scroll-speed="-5">Pihedron</h1>
       </div>
-      <section>
+      <section id="about">
         <h2>
           <span>About</span>
         </h2>
         <hr>
         <div class="split">
-          <div>
+          <div data-scroll data-scroll-speed="-2">
             <p>
               Programming is more than just writing code.
               It's a way of thinking.
@@ -54,6 +55,7 @@
           </div>
         </div>
       </section>
+      <section class="test"></section>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
     <script type="importmap">
@@ -61,7 +63,7 @@
         "imports": {
           "three": "https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js",
           "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.163.0/examples/jsm/",
-          "gsap": "https://cdn.skypack.dev/gsap",
+          "locomotive-scroll": "https://cdn.skypack.dev/locomotive-scroll",
           "shiki": "https://esm.sh/shiki@1.0.0"
         }
       }

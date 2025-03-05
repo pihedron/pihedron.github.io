@@ -109,13 +109,11 @@ p a:hover::after, li a:hover::after {
 
 #app {
   width: 100%;
-  height: 100vh;
-  overflow-y: scroll;
 }
 
 #canvas {
-  position: absolute;
-  height: 100%;
+  position: fixed;
+  height: 100vh;
   z-index: -1;
   background: radial-gradient(circle at 18px 18px, var(--highlight) 4px, transparent 0) center / 40px 40px;
   mask: url(ink.gif) center / cover;
@@ -135,7 +133,7 @@ p a:hover::after, li a:hover::after {
   background: linear-gradient(to right, var(--color), var(--accent));
   -webkit-background-clip: text;
   background-clip: text;
-  animation: grow 2000ms ease-out;
+  animation: fade 2000ms ease-out;
 }
 
 section {
@@ -158,6 +156,7 @@ em {
 .split {
   display: flex;
   gap: 16px;
+  overflow: hidden;
 }
 
 .split > * {
@@ -225,6 +224,10 @@ pre {
 
 .fade {
   opacity: 0;
+}
+
+.test {
+  height: 100vh;
 }
 
 @media screen and (max-width: 1024px) {
