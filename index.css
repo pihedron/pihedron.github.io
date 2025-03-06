@@ -69,6 +69,36 @@ h3 {
   font-size: var(--subheading);
 }
 
+.hide {
+  transform: translateY(100%);
+  transition: all 250ms;
+}
+
+.show {
+  transform: translateY(0);
+  animation: slide 500ms;
+}
+
+.ghost {
+  opacity: 0;
+  transition: all 250ms;
+}
+
+.reveal {
+  opacity: 1;
+  animation: unghost 500ms;
+}
+
+.compress {
+  opacity: 0;
+  transition: all 250ms;
+}
+
+.expand {
+  opacity: 1;
+  animation: expand 500ms;
+}
+
 p a, li a {
   position: relative;
   color: transparent;
@@ -134,6 +164,17 @@ p a:hover::after, li a:hover::after {
   -webkit-background-clip: text;
   background-clip: text;
   animation: fade 2000ms ease-out;
+}
+
+#about {
+  height: 100vh;
+  overflow: hidden;
+}
+
+#about > div {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
 }
 
 section {
@@ -267,5 +308,47 @@ pre {
 
   100% {
     transform: scale(1);
+  }
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(100%);
+  }
+
+  25% {
+    transform: translateY(100%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes unghost {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+   opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes expand {
+  0% {
+    width: 0;
+  }
+
+  25% {
+   width: 0;
+  }
+
+  100% {
+    width: 100%;
   }
 }
